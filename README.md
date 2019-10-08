@@ -7,7 +7,7 @@ ____
 
 ### How to use it?
 
-Firstly, make sure you have selenium >= 3.141.0 and Chrome or Firefox installed.
+Have selenium >= 3.141.0 and Chrome or Firefox installed.
 
 Use `reviews.py` to collect the data. 
 ```
