@@ -18,6 +18,6 @@ arguments:
   -link LINK [LINK ...]
                         Link to Yelp Page you want to scrape reviews from
 ```
-Example: ```python reviews.py --link "https://www.yelp.com/biz/mcdonalds-austin-78"```
+Example: ```python reviews.py -link "https://www.yelp.com/biz/mcdonalds-austin-78"```
 ____
 The output is `reviews.csv` inside the script folder.
