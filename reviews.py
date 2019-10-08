@@ -1,17 +1,14 @@
 import csv
 import argparse
-import sys
 import time
 from selenium import webdriver
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.common.exceptions import NoSuchElementException
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-link")
 args = parser.parse_args()
 
-caps = DesiredCapabilities().CHROME
-caps["pageLoadStrategy"] = "normal"
+
 
 reviewList = []
 class ReviewInfo:
@@ -37,7 +34,7 @@ class ReviewInfo:
 
 
 def getYelpReviews(yelpLink):
-    driver = webdriver.Chrome(executable_path="Z:/ProgramList/chromedriver", desired_capabilities=caps)
+    driver = webdriver.Firefox()
 
     driver.get(yelpLink)
     time.sleep(3)
