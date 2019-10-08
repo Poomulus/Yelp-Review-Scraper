@@ -2,7 +2,6 @@ import csv
 import argparse
 import sys
 import time
-import requests
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.common.exceptions import NoSuchElementException
