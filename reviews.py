@@ -3,6 +3,9 @@ import argparse
 import time
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-link")
@@ -10,7 +13,6 @@ args = parser.parse_args()
 
 reviewList = []
 class ReviewInfo:
-
     def __init__(self, comment, commentLink, rating, ratingDate, profileName, profileLink):
         self.comment = comment
         self.commentLink = commentLink
@@ -32,11 +34,12 @@ class ReviewInfo:
 def getYelpReviews(yelpLink):
     driver = webdriver.Firefox()
     driver.get(yelpLink)
-    time.sleep(3)
+
     #WHILE NEXT BUTTON FOR MORE REVIEWS IS THERE WE WILL CONTINUE GETTING REVIEWS
     nextFound = True
     while nextFound:
-        time.sleep(2)
+
+        WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//div[@class='lemon--div__373c0__1mboc sidebarActionsHoverTarget__373c0__2kfhE arrange__373c0__UHqhV gutter-12__373c0__3kguh layout-stack-small__373c0__3cHex border-color--default__373c0__2oFDT']")))
         reviews = driver.find_elements_by_xpath("//div[@class='lemon--div__373c0__1mboc sidebarActionsHoverTarget__373c0__2kfhE arrange__373c0__UHqhV gutter-12__373c0__3kguh layout-stack-small__373c0__3cHex border-color--default__373c0__2oFDT']")
 
         for review in reviews:
