@@ -8,8 +8,6 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-link")
 args = parser.parse_args()
 
-
-
 reviewList = []
 class ReviewInfo:
 
@@ -31,11 +29,8 @@ class ReviewInfo:
             'profileLink': self.profileLink,
         }
 
-
-
 def getYelpReviews(yelpLink):
     driver = webdriver.Firefox()
-
     driver.get(yelpLink)
     time.sleep(3)
     #WHILE NEXT BUTTON FOR MORE REVIEWS IS THERE WE WILL CONTINUE GETTING REVIEWS
@@ -44,7 +39,6 @@ def getYelpReviews(yelpLink):
         time.sleep(2)
         reviews = driver.find_elements_by_xpath("//div[@class='lemon--div__373c0__1mboc sidebarActionsHoverTarget__373c0__2kfhE arrange__373c0__UHqhV gutter-12__373c0__3kguh layout-stack-small__373c0__3cHex border-color--default__373c0__2oFDT']")
 
-        
         for review in reviews:
             theReview = ReviewInfo('', '', '', '', '', '')
 
@@ -53,7 +47,6 @@ def getYelpReviews(yelpLink):
             rating = ratingDiv.find_element_by_xpath(".//span[@class='lemon--span__373c0__3997G display--inline__373c0__1DbOG border-color--default__373c0__2oFDT']")
             theReview.rating = rating.find_element_by_tag_name('div').get_attribute('aria-label').replace(" star rating", "")
 
-
             #GET DATE OF RATING
             dateOfReview = review.find_element_by_xpath(".//span[@class='lemon--span__373c0__3997G text__373c0__2pB8f text-color--mid__373c0__3G312 text-align--left__373c0__2pnx_']")
             theReview.ratingDate = dateOfReview.text
@@ -61,7 +54,6 @@ def getYelpReviews(yelpLink):
             #GET COMMENT
             commentParagraph = review.find_element_by_xpath(".//p[@class='lemon--p__373c0__3Qnnj text__373c0__2pB8f comment__373c0__3EKjH text-color--normal__373c0__K_MKN text-align--left__373c0__2pnx_']")
             theReview.comment = commentParagraph.text
-
 
             #GET PROFILE NAME AND LINK TO PROFILE
             profileDiv = review.find_element_by_xpath(".//div[@class='lemon--div__373c0__1mboc user-passport-info border-color--default__373c0__2oFDT']")
@@ -102,8 +94,6 @@ def createCSV(yelpLink):
             writer.writerow([str(x), review.comment, review.commentLink, review.rating, review.ratingDate, review.profileName, review.profileLink])
             x+=1
 
-
 if __name__ == '__main__':
     getYelpReviews(args.link)
     createCSV(args.link)
-
